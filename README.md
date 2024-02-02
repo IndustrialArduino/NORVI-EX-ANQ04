@@ -14,3 +14,6 @@ I2C Expansion for Analog Outputs
 Built-in Diagnostics and Alert Features. 
 Robust Architecture. 
 DIN-Rail mount
+
+Datasheet:   https://drive.google.com/open?id=1-fgeSkhCpFJYni3zrTUmBJKhQp0hY7LL&usp=drive_fs
+User Guide:  https://drive.google.com/open?id=1zmrA0kj9rUQZOmbddBnvMDrEf9AArdOd&usp=drive_fs
