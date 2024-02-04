@@ -1,4 +1,4 @@
-E#include "Wire.h"
+#include "Wire.h"
 #define I2C_DEV_ADDR 0x5F
 
 uint32_t i = 0;
