@@ -1,11 +1,8 @@
 #include "Wire.h"
-
 #define I2C_DEV_ADDR 0x5F
 
 uint32_t i = 0;
-
 unsigned int send_value=2000;
-
 
 void setup() {
   Serial.begin(115200);
@@ -14,14 +11,11 @@ void setup() {
   Wire.begin(16,17);
   delay(200);
   SCAN();               // Scan and Print I2C Address of connected devices
-  
   delay(1000);
-
   
   config_dac(I2C_DEV_ADDR,0,0,1,1);  // Configure DAC as First two channels 0 - 10V and last two channels 4-20mA
   
   send_value=2000;      // Set the initial ADC output value as 2000 / Output is 12bit / Maximum value is 4095
-  
 }
 
 void loop() {
@@ -34,21 +28,8 @@ void loop() {
   }
   send_value=send_value+100;                       // Increase output value by 100 each cycle. 
   if(send_value>4095)send_value=0;                 // If the value exceeds 4095 , reset the value to zero
-  
   delay(5000);
-  
-  //Read 16 bytes from the slave
-//  Wire.beginTransmission(I2C_DEV_ADDR);
-//  Wire.write(0x01);  // Register #5 address
-//  Wire.endTransmission();
-//  Wire.requestFrom(0x5F, 6,true);
-//  while(Wire.available()){
-//      Serial.println(Wire.read()); // Read the first output value (second byte)
-//  }
-
-
 }
-
 
 void write_channel(byte device_address, unsigned int channel, unsigned int value){
 unsigned int tft_value=0;
@@ -61,7 +42,6 @@ unsigned int tft_value=0;
   Wire.write(tft_value); //  Register [1] Config
   Wire.endTransmission();
 }
-
 
 void config_dac(byte device_address, unsigned int c1, unsigned int c2, unsigned int c3,  unsigned int c4){
   unsigned int tft_value=0;
@@ -77,22 +57,15 @@ void config_dac(byte device_address, unsigned int c1, unsigned int c2, unsigned 
   Wire.endTransmission();
 }
 
-
-
-
 void SCAN(){
-
-    byte error, address;
+  byte error, address;
   int nDevices;
 
   Serial.println("Scanning...");
 
   nDevices = 0;
   for(address = 1; address < 127; address++) {
-    // The i2c_scanner uses the return value of
-    // the Write.endTransmisstion to see if
-    // a device did acknowledge to the address.
-
+    
     Wire.beginTransmission(address);
     error = Wire.endTransmission();
 
@@ -101,7 +74,6 @@ void SCAN(){
       if (address < 16)
         Serial.print("0");
       Serial.println(address, HEX);
-
       nDevices++;
     }
     else if (error == 4) {
